@@ -33,7 +33,7 @@ pipeline:
                   name: docker_build
                   spec:
                     caching: true
-                    connectorRef: harnessImage
+                    connectorRef: account.harnessImage
                     repo: usmanakramb/jhttp-demo
                     tags:
                       - latest
