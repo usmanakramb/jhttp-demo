@@ -20,19 +20,35 @@ pipeline:
           execution:
             steps:
               - step:
-                  identifier: echo
-                  name: echo
-                  spec:
-                    command: echo hello world
-                  timeout: ""
                   type: Run
+                  identifier: build_java_app
+                  name: Build Java App
+                  spec:
+                    shell: Sh
+                    command: |-
+                      echo "Welcome to Harness CI"
+                      mvn -B package --file pom.xml
+              - step:
+                  type: Test
+                  name: RunTests
+                  identifier: Run_Tests
+                  spec:
+                    command: mvn test
+                    shell: Sh
+                    connectorRef: account.harnessImage
+                    image: maven:3.8-jdk-11
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths:
+                          - target/reports/*.xml
               - step:
                   identifier: dockerbuild
                   name: docker_build
                   spec:
                     caching: true
-                    connectorRef: <+input>
-                    repo: hello/world
+                    connectorRef: account.harnessImage
+                    repo: usmanakramb/jhttp-demo
                     tags:
                       - latest
                   timeout: ""
