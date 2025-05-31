@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_usmanakramb_jhttp_demo_1748665667936-push-trigger-input-set
+  identifier: Build_usmanakramb_jhttp_demo_1748665667936pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_usmanakramb_jhttp_demo_1748665667936
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
