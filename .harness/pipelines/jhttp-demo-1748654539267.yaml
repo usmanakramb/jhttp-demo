@@ -29,6 +29,23 @@ pipeline:
                       echo "Welcome to Harness CI"
                       mvn -B package --file pom.xml
               - step:
+                  type: Test
+                  name: RunTestsWithIntelligence
+                  identifier: RunTestsWithIntelligence
+                  spec:
+                    command: |-
+                      mvn test -Dmaven.test.failure.ignore=true -DfailIfNoTests=false
+                      mvn package -DskipTests
+                    shell: Sh
+                    connectorRef: account.harnessImage
+                    image: maven:3.8-jdk-11
+                    intelligenceMode: true
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths:
+                          - /harness/target/*.xml
+              - step:
                   identifier: dockerbuild
                   name: docker_build
                   spec:
