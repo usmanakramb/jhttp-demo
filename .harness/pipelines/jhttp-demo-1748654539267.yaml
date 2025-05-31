@@ -40,6 +40,11 @@ pipeline:
                     connectorRef: account.harnessImage
                     image: maven:3.8-jdk-11
                     intelligenceMode: true
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths:
+                          - target/surefire-reports/*.xml
               - step:
                   identifier: dockerbuild
                   name: docker_build
