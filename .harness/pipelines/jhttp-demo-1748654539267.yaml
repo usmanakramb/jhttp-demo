@@ -30,21 +30,21 @@ pipeline:
                       mvn -B package --file pom.xml
               - step:
                   type: Test
-                  name: RunTestsWithIntelligence
-                  identifier: RunTestsWithIntelligence
+                  name: RunTests
+                  identifier: Run_Tests
                   spec:
-                    command: |-
-                      mvn test -Dmaven.test.failure.ignore=true -DfailIfNoTests=false
-                      mvn package -DskipTests
-                    shell: Sh
+                    language: Java
                     connectorRef: account.harnessImage
                     image: maven:3.8-jdk-11
-                    intelligenceMode: true
+                    args: test
+                    packages: io.harness.
+                    runOnlySelectedTests: true
+                    postCommand: mvn package -DskipTests
                     reports:
                       type: JUnit
                       spec:
                         paths:
-                          - /harness/target/*.xml
+                          - target/reports/*.xml
               - step:
                   identifier: dockerbuild
                   name: docker_build
