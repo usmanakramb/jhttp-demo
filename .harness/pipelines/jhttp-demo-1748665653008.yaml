@@ -29,7 +29,7 @@ pipeline:
                       echo "Welcome to Harness CI"
                       mvn -B package --file pom.xml
               - step:
-                  type: Test
+                  type: Run
                   name: RunTests
                   identifier: Run_Tests
                   spec:
@@ -41,7 +41,7 @@ pipeline:
                       type: JUnit
                       spec:
                         paths:
-                          - target/reports/*.xml
+                          - target/surefire-reports/*.xml
               - step:
                   identifier: dockerbuild
                   name: docker_build
