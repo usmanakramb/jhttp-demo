@@ -33,13 +33,10 @@ pipeline:
                   name: RunTests
                   identifier: Run_Tests
                   spec:
-                    language: Java
+                    command: mvn test
+                    shell: Sh
                     connectorRef: account.harnessImage
                     image: maven:3.8-jdk-11
-                    args: test
-                    packages: io.harness.
-                    runOnlySelectedTests: true
-                    postCommand: mvn package -DskipTests
                     reports:
                       type: JUnit
                       spec:
