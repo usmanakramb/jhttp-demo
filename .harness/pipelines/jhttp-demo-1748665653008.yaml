@@ -68,6 +68,14 @@ pipeline:
           deploymentType: Kubernetes
           service:
             serviceRef: jhttpdemo
+            serviceInputs:
+              serviceDefinition:
+                type: Kubernetes
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
           environment:
             environmentRef: jhttppreprod
             deployToAll: false
